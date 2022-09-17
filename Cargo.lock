@@ -200,9 +200,9 @@ dependencies = [
 
 [[package]]
 name = "cw-utils"
-version = "0.13.2"
+version = "0.13.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "babd2c090f39d07ce5bf2556962305e795daa048ce20a93709eb591476e4a29e"
+checksum = "9dbaecb78c8e8abfd6b4258c7f4fbeb5c49a5e45ee4d910d3240ee8e1d714e1b"
 dependencies = [
  "cosmwasm-std",
  "schemars",
@@ -220,6 +220,34 @@ dependencies = [
  "cw-storage-plus",
  "schemars",
  "serde",
+]
+
+[[package]]
+name = "cw20"
+version = "0.13.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4cb782b8f110819a4eb5dbbcfed25ffba49ec16bbe32b4ad8da50a5ce68fec05"
+dependencies = [
+ "cosmwasm-std",
+ "cw-utils",
+ "schemars",
+ "serde",
+]
+
+[[package]]
+name = "cw20-base"
+version = "0.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3b370e5fb6b35db58cabd7903b8f9bd4c3bcff701c63bf1a7185a84e60bfa502"
+dependencies = [
+ "cosmwasm-std",
+ "cw-storage-plus",
+ "cw-utils",
+ "cw2",
+ "cw20",
+ "schemars",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]
@@ -249,6 +277,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
 dependencies = [
  "generic-array",
+]
+
+[[package]]
+name = "diogoboilerplate"
+version = "0.1.0"
+dependencies = [
+ "cosmwasm-schema",
+ "cosmwasm-std",
+ "cosmwasm-storage",
+ "cw-multi-test",
+ "cw-storage-plus",
+ "cw-utils",
+ "cw2",
+ "cw20",
+ "cw20-base",
+ "schemars",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]
@@ -512,9 +558,9 @@ checksum = "f3f6f92acf49d1b98f7a81226834412ada05458b7364277387724a237f062695"
 
 [[package]]
 name = "schemars"
-version = "0.8.9"
+version = "0.8.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d21ecb263bf75fc69d5e74b0f2a60b6dd80cfd9fb0eba15c4b9d1104ceffc77"
+checksum = "1847b767a3d62d95cbf3d8a9f0e421cf57a0d8aa4f411d4b16525afb0284d4ed"
 dependencies = [
  "dyn-clone",
  "schemars_derive",
@@ -524,9 +570,9 @@ dependencies = [
 
 [[package]]
 name = "schemars_derive"
-version = "0.8.9"
+version = "0.8.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "219b924f5b39f25b7d7c9203873a2698fdac8db2b396aaea6fa099b699cc40e9"
+checksum = "af4d7e1b012cb3d9129567661a63755ea4b8a7386d339dc945ae187e403c6743"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -652,21 +698,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
-]
-
-[[package]]
-name = "testgen-local"
-version = "0.1.0"
-dependencies = [
- "cosmwasm-schema",
- "cosmwasm-std",
- "cosmwasm-storage",
- "cw-multi-test",
- "cw-storage-plus",
- "cw2",
- "schemars",
- "serde",
- "thiserror",
 ]
 
 [[package]]
