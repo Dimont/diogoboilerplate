@@ -39,8 +39,12 @@ pub struct DetailsResponse {
     pub native_balance: Vec<Coin>,
     /// Balance in cw20 tokens
     pub cw20_balance: Vec<Cw20Coin>,
-    /// Whitelisted cw20 tokens
-    pub cw20_whitelist: Vec<String>,
+    /// Wish tokens by arbiter
+    pub cw20_wishlist: Vec<String>,
+    /// Recipient Balance in native tokens
+    pub recip_native_balance: Vec<Coin>,
+    /// Recipient Balance in cw20 tokens
+    pub recip_cw20_balance: Vec<Cw20Coin>,
 }
 
 
@@ -67,6 +71,11 @@ pub enum ExecuteMsg {
         id: String,
     },
 
+    /// Adds all sent native tokens to the contract
+    TopUpRecip {
+        id: String,
+    },
+
     /// This accepts a properly-encoded ReceiveMsg from a cw20 contract
     Receive(Cw20ReceiveMsg),
 }
@@ -81,12 +90,12 @@ pub struct CreateMsg {
     pub description: String,
     pub end_height: Option<u64>,
     pub end_time: Option<u64>,
-    pub cw20_whitelist: Option<Vec<String>>,
+    pub cw20_wishlist: Option<Vec<String>>,
 }
 
 impl CreateMsg {
-    pub fn addr_whitelist(&self, api: &dyn Api) -> StdResult<Vec<Addr>> {
-        match self.cw20_whitelist.as_ref() {
+    pub fn addr_wishlist(&self, api: &dyn Api) -> StdResult<Vec<Addr>> {
+        match self.cw20_wishlist.as_ref() {
             Some(v) => v.iter().map(|h| api.addr_validate(h)).collect(),
             None => Ok(vec![]),
         }
@@ -99,6 +108,9 @@ pub enum ReceiveMsg {
     CreateEscrow(CreateMsg),
     /// Adds all sent native tokens to the contract
     TopUp {
+        id: String,
+    },
+    TopUpRecip {
         id: String,
     },
 }

@@ -6,12 +6,6 @@ use cw_storage_plus::Map;
 
 use cw20::{ Balance, Cw20CoinVerified };
 
-/*#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct State {
-    pub count: i32,
-    pub owner: Addr,
-}*/
-
 pub const ESCROWS: Map<&str, Escrow> = Map::new("escrow");
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -22,7 +16,7 @@ pub struct Escrow {
     pub recipient: Option<Addr>,
     /// if refunded, funds go to the source
     pub source: Addr,
-    /// Title of the escrow, for example for a bug bounty "Fix issue in contract.rs"
+    /// Title of the escrow
     pub title: String,
     /// Description of the escrow, a more in depth description of how to meet the escrow condition
     pub description: String,
@@ -35,8 +29,10 @@ pub struct Escrow {
     pub end_time: Option<u64>,
     /// Balance in Native and Cw20 tokens
     pub balance: GenericBalance,
-    /// All possible contracts that we accept tokens from
-    pub cw20_whitelist: Vec<Addr>,
+    /// Recipient Balance in Native and Cw20 tokens
+    pub recip_balance: GenericBalance,
+    /// All possible contracts that we accept tokens from recipient
+    pub cw20_wishlist: Vec<Addr>,
 }
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, JsonSchema, Debug, Default)]
@@ -104,7 +100,7 @@ impl Escrow {
         false
     }
 
-    pub fn human_whitelist(&self) -> Vec<String> {
-        self.cw20_whitelist.iter().map(|a| a.to_string()).collect()
+    pub fn human_wishlist(&self) -> Vec<String> {
+        self.cw20_wishlist.iter().map(|a| a.to_string()).collect()
     }
 }
